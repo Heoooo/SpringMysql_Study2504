@@ -25,8 +25,24 @@ public class SecurityConfig {
 			.authorizeHttpRequests((auth)->auth
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/login", "/signup").permitAll()
+					.requestMatchers("/mypage/**").hasAnyRole("USER","ADMIN")
 					.requestMatchers("/admin").hasRole("ADMIN")
 					.anyRequest().authenticated()
+					//기본적으로 기억해야 하는 것 => 접근 권한이 없는데 접근하려고 하면(설령 로그인했어도) => 403 Forbidden 에러 발생
+					//403 에러용 템플릿 페이지 작성 => application.properties 파일에서 작업
+					//이 때, 노란 밑줄(주의)이 나오면 툴에서 하라는대로 설정
+					//templates > error 폴더 생성 후 => 403.html
+			);
+		
+		http
+			.formLogin((auth)->auth
+					.loginPage("/login")
+					.loginProcessingUrl("/loginProc").permitAll()
+			);
+		
+		http
+			.csrf((auth)->auth
+					.disable()
 			);
 		
 		
