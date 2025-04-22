@@ -115,3 +115,23 @@ MySQL 데이터베이스 연동 작업
 		spring.security.error.page = /error/403.html
 	-세션 타임아웃 설정 (초 단위로 설정, 보통 기본값은 30분 정도로 설정)
 		server.servlet.session.timeout = 1800
+		
+		
+MySQL + Spring Security 연동을 통한 데이터베이스 로그인 인증
+1. 선수 요건
+	-기본적으로 회원가입 폼(Form) 페이지를 통해서 아이디, 패스워드가 DB에 암호화되어 입력이 가능
+	-로그인 템플릿 페이지 구현
+	
+2. 로그인 흐름
+	-로그인 페이지를 통해서 아이디, 패스워드를 POST 방식으로 전송
+	-일단 구현해줘야 하는 것들을 구현해놓지 않았다면 => 당연히 로그인 인증은 X
+	
+3. DB 기반 로그인 인증을 구현하기 위해 필요한 파일들
+	-일단 2개 파일 생성 + 1개 파일 추가
+		>MyUserDetailsService.java -> implements 구현 메서드
+		>MyUserDetails.java
+		>MemberRepository.java => findByUsername() 메서드 추가
+	-UserDetailsService 구현
+	-loadUserByUsername()
+	-UserDetails 구현
+	
