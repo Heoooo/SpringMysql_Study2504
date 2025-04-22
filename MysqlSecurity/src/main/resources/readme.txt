@@ -132,6 +132,27 @@ MySQL + Spring Security 연동을 통한 데이터베이스 로그인 인증
 		>MyUserDetails.java
 		>MemberRepository.java => findByUsername() 메서드 추가
 	-UserDetailsService 구현
+		>프레임워크에서 제공하는 UserDetailsService를 상속받아 => MyUserDetailsService 구현(implements)
+		>서비스단에서 MyUserDetailsService.java 파일 생성
+		>기본적으로 구현해줘야 하는 메서드(오버라이드)가 필요 => loadUserByUsername(String username) => UserDetails 타입 반환
+		>loadUserByUsername() 메서드에서 하는 일 => DB에서 아이디 가져오고 => 가져온거 검증
+		>DB 검색을 위해서 MemberRepository 하고 연결이 필요 => 연결 방법은 다양 => @Autowired 필드 주입 방식을 사용
+		>간단하게 할 때는 필드 주입 방식을 사용하나, 실전에서는 생성자 주입 방식을 권장 => 아니면 롬복 애너테이션 등을 사용하는 것도 권장
 	-loadUserByUsername()
+		>인자로 String username을 받음
+		>따라서, 이 username을 가지고 데이터베이스에 가서 검색하고 가져와서 검증
+		>이때 검색을 위해서 MemberRepository에 findByUsername() 메서드 추가 => 이때 반환값은 => MemberEntity
+		>데이터베이스에 아이디가 있다면 => return new MyUserDetails(member);
 	-UserDetails 구현
-	
+		>일단 얘같은 경우는 Entity에서 UserDetails를 상속 받아 구현하는 것도 가능하나 개별 분리하여 구현
+		>이때 MyUserDetails 클래스는 DTO에 해당하므로 => DTO 패키지에 MyUserDetails.java 생성
+		>MyUserDetails 에서는 MemberEntity 회원 객체를 전달 받아서 회원이 가지고 있는 권한, 아이디, 패스워드 등을 꺼내서 리턴
+		>시큐리티 프레임워크에서 제공하는 UserDetails를 상속받아 => MyUserDetails 구현(implements)
+		>역시 위에서 한 것처럼 기본적으로 구현해줘야 하는 메서드가 필요 => 이때, 생성자를 사용해서 member 객체를 연결
+			getAuthorities() => 사용자의 특정 권한을 반환 (코딩 약간 복잡) => member.getRole();
+			getPassword() => 회원의 패스워드 값 반환 => member.getPassword();
+			getUsername() => 회원의 사용자이름(아이디) 값 반환 => member.getUsername();
+		>위 3개가 가장 기본적인 구현 메서드이고 기타 다른 것들도 있으나 DB에 필드 값을 만들어 놓지 않았다면 당장 사용할 일이 X
+		>사용자 아이디 만료, 잠금 여부, 사용 가능 등을 체크하는 메서드 구현 등도 가능 => 기본값은 false 설정
+		>아무튼 DB에 해당 값을 넣지 않았다면 리턴 값을 모두 => true 설정
+		>이러한 메서드를 구현하여 적용하려면 DB에 필드 값도 만들어 놓아야하고, 기타 구현해야 하는 것들도 생각해야 하므로 많은 시간이 필요
