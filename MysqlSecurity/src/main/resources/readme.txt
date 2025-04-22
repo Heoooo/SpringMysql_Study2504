@@ -46,3 +46,31 @@ Spring Security + MySQL + Spring Boot => MySqlSecurity Project
 			csrf()
 				disable()
 		-람다 형식으로 사용 => 최신 버전으로 올라가면서 점점 이렇게 바뀌어 가는 추세라고 보면 됨
+		
+
+MySQL 명령 프롬프트에서 여러 가지 명령어 실습하기
+1. 일단 설치 경로 체크 (Windows 기준)
+	MySQL 설치 경로 확인 => 보통 => C:\Program Files\MySQL\MySQL Server 8.0/bin
+ 
+2. mysql 서비스 실행하기 => Windows 기준 => net 명령어 사용
+	서비스 창에 들어가서 해도 되고, 커맨드 모드에서 net 명령어 사용해서 하는 것도 가능
+	서비스 시작 => net start mysql
+	서비스 종료 => net stop mysql
+	서버(서비스) 종료 => mysqladmin -u root -p shutdown
+	
+	여기서 서비스 이름이 틀리다고 나오면? => mysql80 이름으로 재입력
+	그래도 안되면? 시스템 오류가 나오면? => 관리자 권한으로 명령 프롬프트 실행했는지 체크
+	
+	관리자 실행 여부 확인 => 창 이름쪽에 보면 "관리자"라고 나오면 관리자 권한으로 => 실행
+
+3. 버전 확인
+	mysql --version => 명령 프롬프트 직접 확인
+	mysqladmin --version => 거의 비슷하게 출ㄺ
+	SELECT VERSION(); => 쿼리로 확인
+	
+4. MySQL 서버에 접속하기
+	mysql -u root -p
+
+5. MySQL 서버 서비스 상태 확인 (Windows에서는 그냥 net 명령어 사용해서 체크)
+	net start mysql80 => 서버가 시작되어 있다면 => "요청한 서비스가 이미 시작되었습니다." 출력
+	net stop mysql180 => "MySQL80 서비스는 시작되지 않았습니다." 출력
