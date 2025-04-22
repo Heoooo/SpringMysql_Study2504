@@ -23,7 +23,7 @@ public class SignupController {
 	@PostMapping("/memberProc")
 	public String memberProc(MemberDTO memberDTO) {
 		//회원가입 처리 메서드한테 DTO 전달
-		memberService.memberProc(memberDTO);
+		memberService.create(memberDTO);
 		
 		return "redirect:/login";
 	}
