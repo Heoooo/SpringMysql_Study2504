@@ -1,7 +1,29 @@
 <html layout:decorate="~{layout}">
 	
 	<div layout:fragment="content" class="container my-3">
-		Login Page
+		
+		<form action="@{/loginProc}" method="POST" autocomplete="off">
+			<!-- 에러 출력 -->
+			<div th:if="${param.error}">
+				<p class="alert alert-danger">입력하신 User ID 또는 Password 정보를 다시 확인해주세요!</p>
+			</div>
+			
+			<div class="my-3 border-bottom">
+				<h5>로그인 - Member Login</h5>
+			</div>
+			
+			<div class="mb-3">
+				<label for="username" class="form-label">User ID</label>
+				<input type="text" name="username" id="username" class="form-control">
+			</div>
+			
+			<div class="mb-3">
+				<label for="password" class="form-label">User ID</label>
+				<input type="password" name="password" id="password" class="form-control">
+			</div>
+			
+			<button type="submit" class="btn btn-primary">로그인</button>
+		</form>
 	</div>
 	
 </html>

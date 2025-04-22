@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration //스프링 환경설정 파일임을 의미
@@ -25,6 +26,7 @@ public class SecurityConfig {
 			.authorizeHttpRequests((auth)->auth
 					.requestMatchers("/").permitAll()
 					.requestMatchers("/login", "/signup").permitAll()
+					.requestMatchers("/css/**", "/bootstrap/**").permitAll()
 					.requestMatchers("/mypage/**").hasAnyRole("USER","ADMIN")
 					.requestMatchers("/admin").hasRole("ADMIN")
 					.anyRequest().authenticated()
@@ -47,6 +49,11 @@ public class SecurityConfig {
 		
 		
 		return http.build();
+	}
+	
+	@Bean
+	protected BCryptPasswordEncoder bCryptPasswordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 	
 }
