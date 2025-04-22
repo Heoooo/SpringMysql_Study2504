@@ -1,6 +1,7 @@
 package com.example.mysqlsecurity.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.mysqlsecurity.dto.MemberDTO;
@@ -20,8 +21,12 @@ public class MemberService {
 		
 		//값 셋팅 -> setter, getter
 		member.setUsername(memberDTO.getUsername());
-		member.setPassword(memberDTO.getPassword());
+		//member.setPassword(memberDTO.getPassword());
 		member.setRole("ROLE_USER");
+		
+		//패스워드 암호화
+		BCryptPasswordEncoder passwordencoder = new BCryptPasswordEncoder();
+		member.setPassword(passwordencoder.encode(memberDTO.getPassword()));
 		
 		//데이터베이스 저장
 		memberRepository.save(member);

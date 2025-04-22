@@ -25,7 +25,7 @@ public class SecurityConfig {
 		http
 			.authorizeHttpRequests((auth)->auth
 					.requestMatchers("/").permitAll()
-					.requestMatchers("/login", "/signup").permitAll()
+					.requestMatchers("/login", "/signup", "/memberProc").permitAll()
 					.requestMatchers("/css/**", "/bootstrap/**").permitAll()
 					.requestMatchers("/mypage/**").hasAnyRole("USER","ADMIN")
 					.requestMatchers("/admin").hasRole("ADMIN")
@@ -51,6 +51,8 @@ public class SecurityConfig {
 		return http.build();
 	}
 	
+	
+	//패스워드 인코더 등록
 	@Bean
 	protected BCryptPasswordEncoder bCryptPasswordEncoder() {
 		return new BCryptPasswordEncoder();

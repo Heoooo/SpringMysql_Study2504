@@ -15,7 +15,7 @@ public class SignupController {
 	private MemberService memberService;
 	
 	@GetMapping("/signup")
-	public String signupPage() {
+	public String signupPage(MemberDTO memberDTO) {
 		
 		return "signup";
 	}
