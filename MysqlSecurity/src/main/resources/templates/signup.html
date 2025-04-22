@@ -1,7 +1,35 @@
 <html layout:decorate="~{layout}">
 	
 	<div layout:fragment="content" class="container my-3">
-		Signup Page
+		<script>
+			const msg = "[[${alertMsg}]]";
+			
+			if(msg) {
+				alert(msg);
+				window.location.href = '/signup';
+			}
+		</script>
+		
+		<div class="my-3 border-bottom">
+			<h5>회원가입 - Member Sign-up</h5>
+		</div> 
+		
+		<form th:action="@{/memberProc}" th:object="${memberDTO}" method="POST" autocomplete="off">
+			
+			<!-- 에러 출력 -->			
+			
+			<div class="mb-3">
+				<label for="username" class="form-label">User ID</label>
+				<input type="text" th:field="*{username}" class="form-control">
+			</div>
+			
+			<div class="mb-3">
+				<label for="password" class="form-label">Password</label>
+				<input type="password" th:field="*{password}" class="form-control">
+			</div>
+			
+			<button type="submit" class="btn btn-primary">회원가입</button>
+		</form>
 	</div>
 	
 </html>
