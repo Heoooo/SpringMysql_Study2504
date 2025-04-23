@@ -18,12 +18,12 @@ public class MemberService {
 	public void create(MemberDTO memberDTO) {
 		
 		//회원가입 시 중복된 아이디가 있는지 체크
-		boolean isMember = memberRepository.existsByUsername(memberDTO.getUsername());
+		//boolean isMember = memberRepository.existsByUsername(memberDTO.getUsername());
 		
 		//존재하면
-		if(isMember) {
-			return;	//중복된 사용자이름으로 가입해도 DB에는 등록되지 X
-		}
+		/*
+		 * if(isMember) { return; //중복된 사용자이름으로 가입해도 DB에는 등록되지 X }
+		 */
 		
 		//전달된 memberDTO -> memberEntity로 변환
 		MemberEntity member = new MemberEntity();

@@ -207,3 +207,17 @@ MySQL + Spring Security 연동을 통한 데이터베이스 로그인 인증
 	-페이지 내에서 admin 권한이 있어야 볼 수 있는 div 박스도 적용
 	-페이징
 	
+	
+	-사용자 중복 체크 => @Column(unique = true) 애너테이션 사용하지 않고 처리 + 중복 에러 메시지 출력
+	1. 일단 생각해야 하는 것들
+		-회원가입 시 성공 메시지 출력
+		-중복된 사용자이름 사용하여 가입하려고 하면 에러 메시지 출력
+		-일단 이러한 것을 하려면 => 회원가입 템플릿 페이지에서 => 에러 출력 가능하게 해놓고..
+		
+	2.필요한 파일들
+		-MemberEntity.java => @Column 애너테이션 삭제
+		-application.properties => ddl-auto=create
+		-signup.html => 회원가입 템플릿 페이지
+		-MemberService.java => 중복 체크 코드는 삭제하고 컨트롤러에서 구현
+		-MemberRepository.java => 변경 없음
+		-SignupController.java =>
