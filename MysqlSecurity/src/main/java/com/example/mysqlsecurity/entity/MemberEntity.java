@@ -1,5 +1,6 @@
 package com.example.mysqlsecurity.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class MemberEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //점찍고 자동으로 안나오면 필드 선언 후 다시 시도
 	private int id;
 	
+	@Column(unique = true)
 	private String username;
 	
 	private String password;

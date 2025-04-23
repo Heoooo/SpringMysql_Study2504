@@ -25,7 +25,7 @@
 					[Login]
 					: <span class="fw-bold" th:if="${#authentication.name eq 'anonymousUser'}">Guest</span> 회원님 로그인해주세요!
 				</a>
-				<a class="nav-link" sec:authorize="isAuthenticated()" href="@{/logout}">
+				<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">
 					[Logout]
 					: <span class="fw-bold" th:text="${#authentication.name}"></span>
 					
