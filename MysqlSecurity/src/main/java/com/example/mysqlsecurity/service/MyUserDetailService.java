@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.example.mysqlsecurity.dto.MyUserDetails;
 import com.example.mysqlsecurity.entity.MemberEntity;
 import com.example.mysqlsecurity.repository.MemberRepository;
 
